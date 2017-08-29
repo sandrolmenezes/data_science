@@ -6,7 +6,6 @@
 #install.packages('corplot')
 #install.packages('caTools')
 #install.packages('forecast')
-#install.packages('scales')
 #install.packages('tseries')
 #install.packages('hms')
 
@@ -244,11 +243,12 @@ print(adf.test(ts.value, alternative = "stationary"))
 # arima model
 arima.model <- auto.arima(as.numeric(ts.value))
 tsdisplay(residuals(arima.model), lag.max=22, main='Auto Arima (0,0,0)')
+# change parameters
 #acf 6 
 #pacf 3
 arima.model.2 <- arima(as.numeric(ts.value), order = c(3,1,6))
-tsdisplay(residuals(arima.model.2), lag.max=22, main='Seasonal Model Residuals')
-
+tsdisplay(residuals(arima.model.2), lag.max=22, main=' Arima (3,1,6)')
+#3. Calculate a sales forecast for the next week.
 fcastr2 <- forecast(arima.model.2)
 plot(fcastr2)
 print(fcastr2)
