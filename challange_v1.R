@@ -229,7 +229,7 @@ df.temporalserie <- data.frame(data.frame %>% group_by(dateTs) %>% summarise(com
 # 6038.07 é averages os two other weeks
 df.temporalserie[seq(1+1,nrow(df.temporalserie)+1),] <- df.temporalserie[seq(1,nrow(df.temporalserie)),]
 df.temporalserie[1,] <- c('2016-01-04',6038.07)
-# now df.temporalserie contains 3 frequency os 6 days
+# now df.temporalserie contains 3 frequency os 6 days (df.temporalserie[1:18,])
 
 
 #decopose data
@@ -248,7 +248,7 @@ tsdisplay(residuals(arima.model), lag.max=22, main='Auto Arima (0,0,0)')
 #pacf 3
 arima.model.2 <- arima(as.numeric(ts.value), order = c(3,1,6))
 tsdisplay(residuals(arima.model.2), lag.max=22, main=' Arima (3,1,6)')
-#3. Calculate a sales forecast for the next week.
+#3. Calculate a sales forecast for the next week (df.temporalserie[19:24,]) = 34709,86.
 fcastr2 <- forecast(arima.model.2)
 plot(fcastr2)
 print(fcastr2)
